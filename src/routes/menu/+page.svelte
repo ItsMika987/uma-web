@@ -25,31 +25,36 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;   
-    align-items: center;       
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
   }
 
   h1 {
-    font-size: 42px;
-    margin-bottom: 40px;
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: 2.5rem;
   }
 
   .menu-buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
+    width: 100%;
+    max-width: 320px;
   }
 
   .menu-btn,
   .soon-btn {
-    padding: 14px 40px;
-    font-size: 20px;
-    border-radius: 10px;
+    padding: 1rem 2rem;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    border-radius: 12px;
     cursor: pointer;
-    width: 260px; 
+    width: 100%;
     transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    touch-action: manipulation;
   }
 
   .menu-btn {
@@ -61,6 +66,10 @@
     background: #f5f5f5;
     border-color: #b5b5b5;
     transform: scale(1.03);
+  }
+
+  .menu-btn:active {
+    transform: scale(0.96);
   }
 
   .soon-btn {
@@ -76,7 +85,9 @@
   }
 
   .bottom-row {
-    margin-top: 150px;
+    margin-top: clamp(3rem, 12vw, 6rem);
+    width: 100%;
+    max-width: 320px;
     display: flex;
     justify-content: center;
   }

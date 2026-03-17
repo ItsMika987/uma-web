@@ -38,11 +38,13 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
   }
 
   h1 {
-    font-size: 42px;
-    margin-bottom: 40px;
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: 2rem;
   }
 
   .columns {
@@ -51,6 +53,15 @@
     align-items: flex-start;
     gap: 40px;
     width: 100%;
+    max-width: 900px;
+  }
+
+  @media (max-width: 700px) {
+    .columns {
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
   }
 
   .col {
@@ -61,20 +72,25 @@
   }
 
   .uma-btn {
-    padding: 12px 32px;
-    font-size: 18px;
-    border-radius: 10px;
+    padding: 0.9rem 1.5rem;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    border-radius: 12px;
     cursor: pointer;
-    width: 200px;
+    width: clamp(200px, 60vw, 260px);
     background: white;
     border: 1px solid #cfcfcf;
     transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    touch-action: manipulation;
   }
 
   .uma-btn:hover {
     background: #f5f5f5;
     border-color: #b5b5b5;
     transform: scale(1.03);
+  }
+
+  .uma-btn:active {
+    transform: scale(0.96);
   }
 
   .selected {
@@ -84,25 +100,32 @@
   }
 
   .bottom-row {
-    margin-top: 40px;
+    margin-top: clamp(2rem, 8vw, 4rem);
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .action-btn {
-    padding: 12px 32px;
-    font-size: 18px;
+    padding: 0.9rem 2rem;
+    font-size: clamp(1rem, 4vw, 1.2rem);
     background: white;
     border: 1px solid #cfcfcf;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    touch-action: manipulation;
   }
 
   .action-btn:hover {
     background: #f5f5f5;
     border-color: #b5b5b5;
     transform: scale(1.03);
+  }
+
+  .action-btn:active {
+    transform: scale(0.96);
   }
 
   .disabled {
