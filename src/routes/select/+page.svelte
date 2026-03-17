@@ -10,9 +10,7 @@
   }
 
   function startRace() {
-    if (currentSelection) {
-      goto("/race");
-    }
+    if (currentSelection) goto("/race");
   }
 
   function goBack() {
@@ -20,44 +18,38 @@
   }
 </script>
 
-<!-- svelte-ignore css_unused_selector -->
 <style>
   :global(html),
   :global(body) {
-    height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     font-family: monospace;
     background: #fafafa;
+    overflow-x: hidden;
   }
 
   .wrapper {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    min-height: 100vh;
     padding: 1.5rem;
+    text-align: center;
     box-sizing: border-box;
   }
 
   h1 {
-    font-size: clamp(2rem, 6vw, 3rem);
-    margin-bottom: 2rem;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    margin-bottom: 1.5rem;
   }
 
+  /* Desktop: 3 columns */
   .columns {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
     gap: 40px;
-    width: 100%;
-    max-width: 900px;
+    margin-bottom: 2rem;
   }
 
-  @media (max-width: 700px) {
+  /* Mobile: stack into 1 column */
+  @media (max-width: 900px) {
     .columns {
       flex-direction: column;
       gap: 20px;
@@ -68,7 +60,6 @@
   .col {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 12px;
   }
 
@@ -77,21 +68,15 @@
     font-size: clamp(1rem, 4vw, 1.2rem);
     border-radius: 12px;
     cursor: pointer;
-    width: clamp(200px, 60vw, 260px);
+    width: clamp(220px, 70vw, 260px);
     background: white;
     border: 1px solid #cfcfcf;
-    transition: background 0.15s, border-color 0.15s, transform 0.1s;
-    touch-action: manipulation;
+    transition: 0.15s;
   }
 
   .uma-btn:hover {
     background: #f5f5f5;
-    border-color: #b5b5b5;
     transform: scale(1.03);
-  }
-
-  .uma-btn:active {
-    transform: scale(0.96);
   }
 
   .selected {
@@ -101,48 +86,25 @@
   }
 
   .bottom-row {
-    margin-top: clamp(2rem, 8vw, 4rem);
     display: flex;
+    justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    justify-content: center;
   }
-
-@media (max-width: 700px) {
-  .wrapper,
-  .layout {
-    transform: scale(0.9);
-    transform-origin: top center;
-  }
-}
-
-@media (max-width: 900px) {
-  .columns {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-  }
-}
 
   .action-btn {
     padding: 0.9rem 2rem;
     font-size: clamp(1rem, 4vw, 1.2rem);
+    border-radius: 12px;
     background: white;
     border: 1px solid #cfcfcf;
-    border-radius: 12px;
     cursor: pointer;
-    transition: background 0.15s, border-color 0.15s, transform 0.1s;
-    touch-action: manipulation;
+    transition: 0.15s;
   }
 
   .action-btn:hover {
     background: #f5f5f5;
-    border-color: #b5b5b5;
     transform: scale(1.03);
-  }
-
-  .action-btn:active {
-    transform: scale(0.96);
   }
 
   .disabled {
@@ -185,13 +147,7 @@
 
   <div class="bottom-row">
     <button class="action-btn" on:click={goBack}>Back</button>
-
-    <button
-      class="action-btn {currentSelection ? '' : 'disabled'}"
-      on:click={startRace}
-    >
-      Race
-    </button>
+    <button class="action-btn {currentSelection ? '' : 'disabled'}" on:click={startRace}>Race</button>
   </div>
 </div>
 

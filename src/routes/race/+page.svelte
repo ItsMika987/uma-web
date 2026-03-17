@@ -35,7 +35,7 @@
   let showResults = false;
 
   function makeTrack(p: number): string {
-    const total = 30;
+    const total = 25; // mobile-friendly
     const pos = Math.floor((p / 100) * total);
     return `[${"-".repeat(pos)}(.)${"-".repeat(total - pos)}]`;
   }
@@ -48,10 +48,7 @@
   }
 
   function startRace() {
-    if (!playerUma) {
-      alert("Please select an Uma first!");
-      return;
-    }
+    if (!playerUma) return;
 
     if (interval) stopRace();
 
@@ -101,7 +98,6 @@
   function stopRace() {
     clearInterval(interval!);
     interval = null;
-
     leaderboard = [...finishOrder];
     showResults = true;
   }
@@ -112,126 +108,109 @@
   }
 </script>
 
-<!-- svelte-ignore css_unused_selector -->
 <style>
-.layout {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 20px;
-  padding: 1rem;
-  flex-wrap: wrap;
-  font-family: monospace;
-}
-
-.leaderboard-box,
-.race-box {
-  border: 2px solid #444;
-  padding: 20px;
-  border-radius: 12px;
-  background: #f8f8f8;
-  text-align: center;
-  width: clamp(260px, 90vw, 600px);
-  max-height: 60vh;
-  overflow-y: auto;
-}
-
-@media (max-width: 700px) {
-  .wrapper,
-  .layout {
-    transform: scale(0.9);
-    transform-origin: top center;
+  :global(html),
+  :global(body) {
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+    background: #fafafa;
+    overflow-x: hidden;
   }
-}
 
-
-@media (max-width: 700px) {
   .layout {
+    padding: 1rem;
+    display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: auto;
   }
-}
 
-.racer-block {
-  margin-bottom: 12px;
-  padding: 4px;
-  border-radius: 6px;
-  text-align: center;
-}
+  .box {
+    border: 2px solid #444;
+    padding: 20px;
+    border-radius: 12px;
+    background: #f8f8f8;
+    text-align: center;
+    width: 100%;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
 
-.line {
-  white-space: pre;
-  font-size: clamp(0.8rem, 3vw, 1rem);
-  margin: 0;
-  padding: 0;
-  line-height: 1.3;
-  text-align: center;
-}
+  .racer-block {
+    margin-bottom: 12px;
+    padding: 4px;
+    border-radius: 6px;
+  }
 
-.player {
-  background: #ECFFDC;
-  border: 2px solid #90EE90;
-}
+  .line {
+    white-space: pre;
+    font-size: clamp(0.8rem, 3vw, 1rem);
+    margin: 0;
+  }
 
-.start-btn {
-  margin-top: 20px;
-  width: 100%;
-  padding: 12px 0;
-  font-size: clamp(1rem, 4vw, 1.2rem);
-  background: white;
-  border: 1px solid #cfcfcf;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, transform 0.1s;
-  touch-action: manipulation;
-}
+  .player {
+    background: #ECFFDC;
+    border: 2px solid #90EE90;
+  }
 
-.start-btn:hover {
-  background: #f5f5f5;
-  border-color: #b5b5b5;
-  transform: scale(1.03);
-}
+  .start-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px 0;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    border-radius: 10px;
+    background: white;
+    border: 1px solid #cfcfcf;
+    cursor: pointer;
+    transition: 0.15s;
+  }
 
-.results-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-}
+  .start-btn:hover {
+    background: #f5f5f5;
+    transform: scale(1.03);
+  }
 
-.results-box {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  border: 2px solid #444;
-  text-align: center;
-  width: clamp(260px, 90vw, 400px);
-}
+  .results-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
 
-.results-box button {
-  padding: 12px 30px;
-  font-size: clamp(1rem, 4vw, 1.2rem);
-  background: white;
-  border: 1px solid #cfcfcf;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, transform 0.1s;
-  width: 100%;
-  margin-top: 10px;
-}
+  .results-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #444;
+    text-align: center;
+    width: clamp(260px, 90vw, 400px);
+  }
 
-.results-box button:hover {
-  background: #f5f5f5;
-  border-color: #b5b5b5;
-  transform: scale(1.03);
-}
+  .results-box button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px 0;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    border-radius: 10px;
+    background: white;
+    border: 1px solid #cfcfcf;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+
+  .results-box button:hover {
+    background: #f5f5f5;
+    transform: scale(1.03);
+  }
 </style>
 
 <div class="layout">
-  <div class="leaderboard-box">
+  <div class="box">
     <strong>Leaderboard</strong>
     <br><br>
 
@@ -244,7 +223,7 @@
     <button class="start-btn" on:click={startRace}>Start Race</button>
   </div>
 
-  <div class="race-box">
+  <div class="box">
     <strong>Race</strong>
     <br><br>
 
@@ -273,5 +252,3 @@
     </div>
   </div>
 {/if}
-
-c
