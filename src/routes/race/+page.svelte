@@ -35,7 +35,7 @@
   let showResults = false;
 
   function makeTrack(p: number): string {
-    const total = 40; 
+    const total = 30;
     const pos = Math.floor((p / 100) * total);
     return `[${"-".repeat(pos)}(.)${"-".repeat(total - pos)}]`;
   }
@@ -112,6 +112,7 @@
   }
 </script>
 
+<!-- svelte-ignore css_unused_selector -->
 <style>
 .layout {
   display: flex;
@@ -134,6 +135,15 @@
   max-height: 60vh;
   overflow-y: auto;
 }
+
+@media (max-width: 700px) {
+  .wrapper,
+  .layout {
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+}
+
 
 @media (max-width: 700px) {
   .layout {

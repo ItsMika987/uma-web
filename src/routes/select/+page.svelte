@@ -20,6 +20,7 @@
   }
 </script>
 
+<!-- svelte-ignore css_unused_selector -->
 <style>
   :global(html),
   :global(body) {
@@ -106,6 +107,22 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+
+@media (max-width: 700px) {
+  .wrapper,
+  .layout {
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+}
+
+@media (max-width: 900px) {
+  .columns {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+}
 
   .action-btn {
     padding: 0.9rem 2rem;

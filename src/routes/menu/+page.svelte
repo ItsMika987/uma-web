@@ -11,15 +11,15 @@
 </script>
 
 <style>
-  :global(html),
-  :global(body) {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: monospace;
-    background: #fafafa;
-  }
+:global(html),
+:global(body) {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
+  background: #fafafa;
+  overflow-x: hidden; 
+}
 
   .wrapper {
     height: 100vh;
