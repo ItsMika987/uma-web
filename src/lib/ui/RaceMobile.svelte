@@ -91,7 +91,7 @@
 
   .leaderboard-box,
   .race-box {
-    width: 100%;
+    width: 90%;
     padding: 12px;
     border-radius: 12px;
     background: var(--box-bg);
