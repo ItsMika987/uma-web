@@ -145,9 +145,6 @@ body, main, div {
   z-index: 1;
 }
 
-* {
-  outline: 1px solid rgba(255,0,0,0.2);
-}
 
 
 </style>
@@ -186,14 +183,7 @@ body, main, div {
 
   <div class="bottom-row">
     <button class="action-btn" on:click={goBack}>Back</button>
-    <button
-  on:click={() => {
-    selectedUma.update(v => v); // hydrate BEFORE navigation
-    goto('/race');
-  }}
->
-  Race
-</button>
+    <button class="action-btn" on:click={startRace}>Race</button>
 
   </div>
 </div>
