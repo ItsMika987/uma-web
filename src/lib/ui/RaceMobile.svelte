@@ -58,26 +58,87 @@
   .mobile-layout {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 1rem;
+    gap: 16px;
+    padding: 12px;
   }
 
   .leaderboard-box,
   .race-box {
     width: 100%;
     border: 2px solid #444;
-    padding: 15px;
+    padding: 12px;
     border-radius: 12px;
-    background: #f8f8f8;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  strong {
+    font-size: 16px;
+  }
+
+  .leaderboard-box div,
+  .race-box .line {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  .racer-block {
+    margin-bottom: 6px;
   }
 
   .line {
-    font-size: 12px;
     white-space: pre;
+    font-family: monospace;
   }
 
   .player {
     background: #ECFFDC;
     border: 2px solid #90EE90;
+    padding: 4px;
+    border-radius: 6px;
+  }
+
+  .start-btn {
+    margin-top: 12px;
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+  }
+
+  /* Results overlay */
+  .results-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .results-box {
+    width: 90%;
+    max-width: 360px;
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    text-align: center;
+  }
+
+  .results-box p {
+    font-size: 14px;
+    margin: 4px 0;
+  }
+
+  .results-box button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
   }
 </style>
+
