@@ -28,18 +28,20 @@
     playerUma = v;
   });
 
-  onMount(() => {
+onMount(() => {
+  // 1. Hydrate store FIRST
+  selectedUma.update(v => v);
+
+  // 2. Then detect device
 const check = () => {
   isMobile = window.innerWidth < 900;
 };
 
-check(); // runs immediately
+check(); // ← THIS MUST RUN IMMEDIATELY
 window.addEventListener("resize", check);
 
+});
 
-
-    selectedUma.update(v => v);
-  });
 
   const names: string[] = [
     "Special Week", "Silence Suzuka", "Tokai Teio",

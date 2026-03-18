@@ -82,3 +82,5 @@
     border: 2px solid #90EE90;
   }
 </style>
+
+<p style="color:red">MOBILE UI</p>
