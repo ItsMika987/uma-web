@@ -55,12 +55,13 @@
 {/if}
 
 <style>
-  .mobile-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 1rem;
-  }
+.mobile-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 1rem;
+}
+
 
   .leaderboard-box,
   .race-box {
@@ -71,10 +72,10 @@
     background: #f8f8f8;
   }
 
-  .line {
-    font-size: 12px;
-    white-space: pre;
-  }
+.line {
+  font-size: 12px;
+}
+
 
   .player {
     background: #ECFFDC;

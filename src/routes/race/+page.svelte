@@ -29,12 +29,13 @@
   });
 
   onMount(() => {
-    const check = () => {
-      isMobile = window.innerWidth < 900;
-    };
+const check = () => {
+  isMobile = window.innerWidth < 900;
+};
 
-    check();
-    window.addEventListener("resize", check);
+check(); // runs immediately
+window.addEventListener("resize", check);
+
 
 
     selectedUma.update(v => v);
@@ -53,11 +54,12 @@
     return [...arr].sort(() => Math.random() - 0.5);
   }
 
-  function makeTrack(p: number): string {
-    const total = isMobile ? 18 : 50;
-    const pos = Math.floor((p / 100) * total);
-    return `[${"-".repeat(pos)}(.)${"-".repeat(total - pos)}]`;
-  }
+function makeTrack(p: number): string {
+  const total = isMobile ? 18 : 50;
+  const pos = Math.floor((p / 100) * total);
+  return `[${"-".repeat(pos)}(.)${"-".repeat(total - pos)}]`;
+}
+
 
   function medal(i: number): string {
     return ["🥇", "🥈", "🥉"][i] || "";
