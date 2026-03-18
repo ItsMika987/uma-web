@@ -1,5 +1,4 @@
 <script lang="ts">
-  export const prerender = false;
   import { selectedUma } from "$lib/umaStore";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
@@ -8,13 +7,13 @@
   let playerUma: string | null = null;
 
   selectedUma.subscribe(v => {
-    playerUma = v; // ensures store updates BEFORE navigation
+    playerUma = v;
   });
 
   let showResults = false;
 
   onMount(() => {
-    showResults = false; // prevents invisible overlay blocking mobile taps
+    showResults = false;
   });
 
   type Racer = {
@@ -43,7 +42,7 @@
   let finishOrder: Racer[] = [];
 
   function makeTrack(p: number): string {
-    const total = 18; // shorter track for mobile readability
+    const total = 18; // shorter track for mobile
     const pos = Math.floor((p / 100) * total);
     return `[${"-".repeat(pos)}(.)${"-".repeat(total - pos)}]`;
   }
@@ -127,23 +126,17 @@
     overflow-y: auto;
   }
 
-  /* PC CENTER WRAPPER */
-  .center-wrap {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  /* DESKTOP — original layout but centered */
+  /* ORIGINAL PC LAYOUT RESTORED */
   .layout {
     display: flex;
     justify-content: flex-start;
     gap: 30px;
     margin-top: 40px;
+    padding-left: 20px;
   }
 
   .leaderboard-box {
-    width: 300px; /* bigger PC leaderboard */
+    width: 260px; /* original */
     border: 2px solid #444;
     padding: 20px;
     border-radius: 12px;
@@ -154,7 +147,7 @@
   }
 
   .race-box {
-    width: 900px; /* bigger PC race UI */
+    width: 600px; /* original */
     border: 2px solid #444;
     padding: 20px;
     border-radius: 12px;
@@ -235,13 +228,14 @@
     transform: scale(1.03);
   }
 
-  /* FINAL MOBILE FIXES */
+  /* MOBILE FIXES (KEEP THESE) */
   @media (max-width: 900px) {
     .layout {
       flex-direction: column;
       padding: 1rem;
       margin-top: 0;
       gap: 20px;
+      padding-left: 0;
     }
 
     .leaderboard-box,
@@ -252,37 +246,35 @@
     }
 
     .line {
-      font-size: 0.75rem !important; /* prevents zoom */
+      font-size: 0.75rem !important;
     }
   }
 </style>
 
-<div class="center-wrap">
-  <div class="layout">
-    <div class="leaderboard-box">
-      <strong>Leaderboard</strong>
-      <br><br>
+<div class="layout">
+  <div class="leaderboard-box">
+    <strong>Leaderboard</strong>
+    <br><br>
 
-      {#each leaderboard as r, i}
-        <div class="{r.isPlayer ? 'player' : ''}">
-          {medal(i)} {i + 1}. [{r.number}] {r.name}
-        </div>
-      {/each}
+    {#each leaderboard as r, i}
+      <div class="{r.isPlayer ? 'player' : ''}">
+        {medal(i)} {i + 1}. [{r.number}] {r.name}
+      </div>
+    {/each}
 
-      <button class="start-btn" on:click={startRace}>Start Race</button>
-    </div>
+    <button class="start-btn" on:click={startRace}>Start Race</button>
+  </div>
 
-    <div class="race-box">
-      <strong>Race</strong>
-      <br><br>
+  <div class="race-box">
+    <strong>Race</strong>
+    <br><br>
 
-      {#each racers as r}
-        <div class="racer-block {r.isPlayer ? 'player' : ''}">
-          <div class="line">[{r.number}] {r.name}</div>
-          <div class="line">{makeTrack(r.progress)}</div>
-        </div>
-      {/each}
-    </div>
+    {#each racers as r}
+      <div class="racer-block {r.isPlayer ? 'player' : ''}">
+        <div class="line">[{r.number}] {r.name}</div>
+        <div class="line">{makeTrack(r.progress)}</div>
+      </div>
+    {/each}
   </div>
 </div>
 
