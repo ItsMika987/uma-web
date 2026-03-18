@@ -37,16 +37,17 @@
     overflow-y: auto;
   }
 
-html, body {
-  touch-action: manipulation;
-}
-
+  html, body {
+    touch-action: manipulation;
+  }
 
   .wrapper {
     min-height: 100vh;
     padding: 1.5rem;
     text-align: center;
     box-sizing: border-box;
+    background: var(--bg);
+    color: var(--text);
   }
 
   h1 {
@@ -83,7 +84,7 @@ html, body {
     width: 260px;
     background: var(--button-bg);
     color: var(--button-text);
-    border-color: var(--box-border);
+    border: 1px solid var(--box-border);
     transition: 0.15s;
   }
 
@@ -99,11 +100,12 @@ html, body {
     transform: scale(1.03);
   }
 
-  .selected {
-    background: #ECFFDC;
-    border: 1px solid #90EE90;
-    transform: scale(1.03);
-  }
+.selected {
+  background: var(--selected-bg);
+  border: 1px solid var(--selected-border);
+  transform: scale(1.03);
+}
+
 
   .bottom-row {
     display: flex;
@@ -118,7 +120,7 @@ html, body {
     border-radius: 12px;
     background: var(--button-bg);
     color: var(--button-text);
-    border-color: var(--box-border);
+    border: 1px solid var(--box-border);
     cursor: pointer;
     transition: 0.15s;
   }
@@ -133,22 +135,19 @@ html, body {
     pointer-events: none;
   }
 
-button {
-  position: relative;
-  z-index: 10;
-  pointer-events: auto;
-}
+  button {
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+  }
 
-* {
-  pointer-events: auto;
-}
+  * {
+    pointer-events: auto;
+  }
 
-body, main, div {
-  z-index: 1;
-}
-
-
-
+  body, main, div {
+    z-index: 1;
+  }
 </style>
 
 <div class="wrapper">
@@ -176,7 +175,7 @@ body, main, div {
     <div class="col">
       <button class="uma-btn {currentSelection === 'Tokai Teio' ? 'selected' : ''}" on:click={() => selectUma('Tokai Teio')}>Tokai Teio</button>
       <button class="uma-btn {currentSelection === 'Vodka' ? 'selected' : ''}" on:click={() => selectUma('Vodka')}>Vodka</button>
-      <button class="uma-btn {currentSelection === 'Hishi Amazon' ? 'selected' : ''}" on:click={() => selectUma('Hishi Amazon')}>Hishi Amazon</button>
+      <button class="uma-btn {currentSelection === 'Meisho Doto' ? 'selected' : ''}" on:click={() => selectUma('Meisho Doto')}>Meisho Doto</button>
       <button class="uma-btn {currentSelection === 'Nice Nature' ? 'selected' : ''}" on:click={() => selectUma('Nice Nature')}>Nice Nature</button>
       <button class="uma-btn {currentSelection === 'Air Groove' ? 'selected' : ''}" on:click={() => selectUma('Air Groove')}>Air Groove</button>
       <button class="uma-btn {currentSelection === 'Narita Brian' ? 'selected' : ''}" on:click={() => selectUma('Narita Brian')}>Narita Brian</button>
@@ -186,6 +185,5 @@ body, main, div {
   <div class="bottom-row">
     <button class="action-btn" on:click={goBack}>Back</button>
     <button class="action-btn" on:click={startRace}>Race</button>
-
   </div>
 </div>

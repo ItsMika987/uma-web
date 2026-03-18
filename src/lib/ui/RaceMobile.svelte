@@ -1,13 +1,28 @@
 <script lang="ts">
-  export let racers;
-  export let leaderboard;
-  export let finishOrder;
-  export let showResults;
-  export let startRace;
-  export let restartRace;
-  export let gotoMenu;
-  export let medal;
-  export let makeTrack;
+  type Racer = {
+    id: number;
+    name: string;
+    number: number;
+    progress: number;
+    isPlayer: boolean;
+  };
+
+  export let racers: Racer[];
+  export let leaderboard: Racer[];
+  export let finishOrder: Racer[];
+  export let showResults: boolean;
+  export let startRace: () => void;
+  export let restartRace: () => void;
+  export let gotoMenu: () => void;
+  export let medal: (i: number) => string;
+  export let makeTrack: (p: number) => string;
+
+  // ⭐ Correct ordinal suffixes (1st, 2nd, 3rd, 4th...)
+  function ordinal(n: number): string {
+    const s = ["th", "st", "nd", "rd"];
+    const v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+  }
 </script>
 
 <div class="mobile-layout">
@@ -42,8 +57,18 @@
     <div class="results-box">
       <h2>Results</h2>
 
+      <!-- ⭐ Placement banner -->
+      {#if finishOrder.length > 0}
+        <h3 class="placement-banner">
+          You finished {ordinal(finishOrder.findIndex(r => r.isPlayer) + 1)}!
+        </h3>
+      {/if}
+
       {#each finishOrder as r, i}
-        <p class="{r.isPlayer ? 'player' : ''}">
+        <p class="
+          {r.isPlayer ? 'player' : ''}
+          {i === 0 && r.isPlayer ? 'first-place' : ''}
+        ">
           {medal(i)} {i + 1}. [{r.number}] {r.name}
         </p>
       {/each}
@@ -60,6 +85,8 @@
     flex-direction: column;
     gap: 16px;
     padding: 12px;
+    background: var(--bg);
+    color: var(--text);
   }
 
   .leaderboard-box,
@@ -69,30 +96,7 @@
     border-radius: 12px;
     background: var(--box-bg);
     color: var(--text);
-    border-color: var(--box-border);
-
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  }
-
-.leaderboard-box,
-.race-box {
-  max-width: 90%;
-  overflow: hidden;
-}
-
-
-strong {
-  font-size: 14px;
-}
-
-.leaderboard-box div,
-.race-box .line {
-  font-size: 11px;
-}
-
-
-  .racer-block {
-    margin-bottom: 6px;
+    border: 2px solid var(--box-border);
   }
 
   .line {
@@ -101,25 +105,29 @@ strong {
   }
 
   .player {
-    background: #ECFFDC;
-    border: 2px solid #90EE90;
+    background: var(--player-bg);
+    border: 2px solid var(--player-border);
     padding: 4px;
     border-radius: 6px;
   }
 
-  .start-btn {
-    margin-top: 12px;
-    width: 100%;
-    padding: 10px;
-    font-size: 15px;
-    border-radius: 10px;
-    background: var(--button-bg);
-    color: var(--button-text);
-    border-color: var(--box-border);
-
+  /* ⭐ Gold glow for 1st place */
+  .first-place {
+    background: var(--first-bg);
+    border: 2px solid var(--first-border);
+    box-shadow: var(--first-glow);
+    padding: 6px;
+    border-radius: 6px;
   }
 
-  /* Results overlay */
+  .placement-banner {
+    margin-top: -10px;
+    margin-bottom: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text);
+  }
+
   .results-overlay {
     position: fixed;
     inset: 0;
@@ -134,26 +142,9 @@ strong {
     max-width: 360px;
     background: var(--box-bg);
     color: var(--text);
-    border-color: var(--box-border);
+    border: 2px solid var(--box-border);
     padding: 18px;
     border-radius: 14px;
     text-align: center;
   }
-
-  .results-box p {
-    font-size: 14px;
-    margin: 4px 0;
-  }
-
-  .results-box button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 10px;
-    background: var(--button-bg);
-    color: var(--button-text);
-    border-color: var(--box-border);
-
-  }
 </style>
-

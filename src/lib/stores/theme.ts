@@ -11,4 +11,3 @@ darkMode.subscribe(v => {
     localStorage.setItem("darkMode", v ? "true" : "false");
   }
 });
-

@@ -6,14 +6,8 @@
   import RacePC from "$lib/ui/RacePC.svelte";
   import RaceMobile from "$lib/ui/RaceMobile.svelte";
 
-  // -----------------------------
-  // FIX 1 — Hydrate store BEFORE rendering (Samsung Internet fix)
-  // -----------------------------
   selectedUma.update(v => v);
 
-  // -----------------------------
-  // TYPES
-  // -----------------------------
   type Racer = {
     id: number;
     name: string;
@@ -22,9 +16,6 @@
     isPlayer: boolean;
   };
 
-  // -----------------------------
-  // FIX 2 — Reliable mobile detection (Samsung Internet + Chrome)
-  // -----------------------------
   let isMobile: boolean =
     typeof window !== "undefined"
       ? window.matchMedia("(max-width: 900px)").matches
@@ -39,9 +30,6 @@
     window.addEventListener("resize", check);
   });
 
-  // -----------------------------
-  // STATE
-  // -----------------------------
   let interval: ReturnType<typeof setInterval> | null = null;
   let playerUma: string | null = null;
 
@@ -54,13 +42,10 @@
     playerUma = v;
   });
 
-  // -----------------------------
-  // DATA
-  // -----------------------------
   const names: string[] = [
     "Special Week", "Silence Suzuka", "Tokai Teio",
     "Mejiro McQueen", "Gold Ship", "Vodka",
-    "Daiwa Scarlet", "Rice Shower", "Hishi Amazon",
+    "Daiwa Scarlet", "Rice Shower", "Meisho Doto",
     "Kitasan Black", "Satono Diamond", "Nice Nature",
     "Biwa Hayahide", "T.M. Opera O", "Air Groove",
     "Agnes Tachyon", "Symboli Rudolf", "Narita Brian"
@@ -70,9 +55,6 @@
     return [...arr].sort(() => Math.random() - 0.5);
   }
 
-  // -----------------------------
-  // HELPERS
-  // -----------------------------
   function makeTrack(p: number): string {
     const total = isMobile ? 50 : 50;
     const pos = Math.floor((p / 100) * total);
@@ -83,9 +65,6 @@
     return ["🥇", "🥈", "🥉"][i] || "";
   }
 
-  // -----------------------------
-  // RACE LOGIC
-  // -----------------------------
   function startRace(): void {
     if (!playerUma) return;
 

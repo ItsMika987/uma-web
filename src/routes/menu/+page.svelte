@@ -12,19 +12,18 @@
   function settings() {
     goto("/settings");
   }
-
 </script>
 
 <style>
-:global(html),
-:global(body) {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: monospace;
-  background: var(--bg);
-  overflow-x: hidden; 
-}
+  :global(html),
+  :global(body) {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+    background: var(--bg);
+    overflow-x: hidden;
+  }
 
   .wrapper {
     height: 100vh;
@@ -40,6 +39,7 @@
   h1 {
     font-size: clamp(2rem, 6vw, 3rem);
     margin-bottom: 2.5rem;
+    color: var(--text);
   }
 
   .menu-buttons {
@@ -60,13 +60,12 @@
     width: 100%;
     transition: background 0.15s, border-color 0.15s, transform 0.1s;
     touch-action: manipulation;
+    border: 1px solid var(--box-border);
   }
 
   .menu-btn {
-background: var(--button-bg);
-color: var(--button-text);
-border-color: var(--box-border);
-
+    background: var(--button-bg);
+    color: var(--button-text);
   }
 
   .menu-btn:hover {
@@ -80,10 +79,8 @@ border-color: var(--box-border);
   }
 
   .soon-btn {
-background: var(--button-bg);
-color: var(--button-text);
-border-color: var(--box-border);
-
+    background: var(--button-bg);
+    color: var(--button-text);
   }
 
   .soon-btn:hover {
@@ -99,6 +96,7 @@ border-color: var(--box-border);
     max-width: 320px;
     display: flex;
     justify-content: center;
+    gap: 10px;
   }
 </style>
 
@@ -115,6 +113,5 @@ border-color: var(--box-border);
   <div class="bottom-row">
     <button class="menu-btn" on:click={goBack}>Title Screen</button>
     <button class="menu-btn" on:click={settings}>Settings</button>
-
   </div>
 </div>

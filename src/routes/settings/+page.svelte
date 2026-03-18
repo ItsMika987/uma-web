@@ -24,8 +24,7 @@
     border-radius: 12px;
     background: var(--box-bg);
     color: var(--text);
-    border-color: var(--box-border);
-
+    border: 2px solid var(--box-border);
   }
 
   h2 {
@@ -52,7 +51,8 @@
     border-radius: 10px;
     background: var(--button-bg);
     color: var(--button-text);
-    border-color: var(--box-border);
+    border: 1px solid var(--box-border);
     font-size: 16px;
+    cursor: pointer;
   }
 </style>
