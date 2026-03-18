@@ -5,6 +5,8 @@
 
   let currentSelection: string | null = null;
 
+  selectedUma.update(v => v);
+
   onMount(() => {
     selectedUma.update(v => v);
   });
@@ -34,6 +36,11 @@
     overflow-x: hidden;
     overflow-y: auto;
   }
+
+html, body {
+  touch-action: manipulation;
+}
+
 
   .wrapper {
     min-height: 100vh;
@@ -123,6 +130,26 @@
     opacity: 0.4;
     pointer-events: none;
   }
+
+button {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+* {
+  pointer-events: auto;
+}
+
+body, main, div {
+  z-index: 1;
+}
+
+* {
+  outline: 1px solid rgba(255,0,0,0.2);
+}
+
+
 </style>
 
 <div class="wrapper">
