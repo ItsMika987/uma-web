@@ -5,8 +5,9 @@
 
   let currentSelection: string | null = null;
 
+  // Fixes mobile "Race" button not working on first load
   onMount(() => {
-    selectedUma.update(v => v); // fixes mobile Race button not working
+    selectedUma.update(v => v);
   });
 
   function selectUma(name: string) {
@@ -23,8 +24,6 @@
   }
 </script>
 
-<!-- svelte-ignore css_unused_selector -->
-<!-- svelte-ignore css_unused_selector -->
 <style>
   :global(html),
   :global(body) {
@@ -130,7 +129,32 @@
   <h1>Select Your Uma</h1>
 
   <div class="columns">
-    <slot />
+    <div class="col">
+      <button class="uma-btn {currentSelection === 'Special Week' ? 'selected' : ''}" on:click={() => selectUma('Special Week')}>Special Week</button>
+      <button class="uma-btn {currentSelection === 'Mejiro McQueen' ? 'selected' : ''}" on:click={() => selectUma('Mejiro McQueen')}>Mejiro McQueen</button>
+      <button class="uma-btn {currentSelection === 'Daiwa Scarlet' ? 'selected' : ''}" on:click={() => selectUma('Daiwa Scarlet')}>Daiwa Scarlet</button>
+      <button class="uma-btn {currentSelection === 'Kitasan Black' ? 'selected' : ''}" on:click={() => selectUma('Kitasan Black')}>Kitasan Black</button>
+      <button class="uma-btn {currentSelection === 'Biwa Hayahide' ? 'selected' : ''}" on:click={() => selectUma('Biwa Hayahide')}>Biwa Hayahide</button>
+      <button class="uma-btn {currentSelection === 'Agnes Tachyon' ? 'selected' : ''}" on:click={() => selectUma('Agnes Tachyon')}>Agnes Tachyon</button>
+    </div>
+
+    <div class="col">
+      <button class="uma-btn {currentSelection === 'Silence Suzuka' ? 'selected' : ''}" on:click={() => selectUma('Silence Suzuka')}>Silence Suzuka</button>
+      <button class="uma-btn {currentSelection === 'Gold Ship' ? 'selected' : ''}" on:click={() => selectUma('Gold Ship')}>Gold Ship</button>
+      <button class="uma-btn {currentSelection === 'Rice Shower' ? 'selected' : ''}" on:click={() => selectUma('Rice Shower')}>Rice Shower</button>
+      <button class="uma-btn {currentSelection === 'Satono Diamond' ? 'selected' : ''}" on:click={() => selectUma('Satono Diamond')}>Satono Diamond</button>
+      <button class="uma-btn {currentSelection === 'T.M. Opera O' ? 'selected' : ''}" on:click={() => selectUma('T.M. Opera O')}>T.M. Opera O</button>
+      <button class="uma-btn {currentSelection === 'Symboli Rudolf' ? 'selected' : ''}" on:click={() => selectUma('Symboli Rudolf')}>Symboli Rudolf</button>
+    </div>
+
+    <div class="col">
+      <button class="uma-btn {currentSelection === 'Tokai Teio' ? 'selected' : ''}" on:click={() => selectUma('Tokai Teio')}>Tokai Teio</button>
+      <button class="uma-btn {currentSelection === 'Vodka' ? 'selected' : ''}" on:click={() => selectUma('Vodka')}>Vodka</button>
+      <button class="uma-btn {currentSelection === 'Hishi Amazon' ? 'selected' : ''}" on:click={() => selectUma('Hishi Amazon')}>Hishi Amazon</button>
+      <button class="uma-btn {currentSelection === 'Nice Nature' ? 'selected' : ''}" on:click={() => selectUma('Nice Nature')}>Nice Nature</button>
+      <button class="uma-btn {currentSelection === 'Air Groove' ? 'selected' : ''}" on:click={() => selectUma('Air Groove')}>Air Groove</button>
+      <button class="uma-btn {currentSelection === 'Narita Brian' ? 'selected' : ''}" on:click={() => selectUma('Narita Brian')}>Narita Brian</button>
+    </div>
   </div>
 
   <div class="bottom-row">
