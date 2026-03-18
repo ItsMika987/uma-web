@@ -23,6 +23,7 @@
   }
 </script>
 
+<!-- svelte-ignore css_unused_selector -->
 <style>
   :global(html),
   :global(body) {
@@ -158,6 +159,14 @@
 
   <div class="bottom-row">
     <button class="action-btn" on:click={goBack}>Back</button>
-    <button class="action-btn {currentSelection ? '' : 'disabled'}" on:click={startRace}>Race</button>
+    <button
+  on:click={() => {
+    selectedUma.update(v => v); // hydrate BEFORE navigation
+    goto('/race');
+  }}
+>
+  Race
+</button>
+
   </div>
 </div>
