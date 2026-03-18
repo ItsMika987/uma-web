@@ -17,13 +17,13 @@
     color: #e5e5e5;
   }
 
-  :global(body.dark .box),
   :global(body.dark .leaderboard-box),
   :global(body.dark .race-box),
   :global(body.dark .results-box),
   :global(body.dark .settings-box) {
     background: #1e1e1e !important;
     border-color: #333 !important;
+    color: #e5e5e5 !important;
   }
 
   :global(body.dark button) {
@@ -32,3 +32,4 @@
     border-color: #444 !important;
   }
 </style>
+
