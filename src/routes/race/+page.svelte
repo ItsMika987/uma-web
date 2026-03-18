@@ -1,30 +1,19 @@
 <script lang="ts">
-import { selectedUma } from "$lib/umaStore";
-import { goto } from "$app/navigation";
-import { onMount } from "svelte";
-
-// FIX 1 — hydrate store immediately
-selectedUma.update(v => v);
-
-// FIX 2 — reliable mobile detection
-let isMobile: boolean =
-  typeof window !== "undefined"
-    ? window.matchMedia("(max-width: 900px)").matches
-    : false;
-
-onMount(() => {
-  const check = () => {
-    isMobile = window.matchMedia("(max-width: 900px)").matches;
-  };
-
-  check();
-  window.addEventListener("resize", check);
-});
-
+  import { selectedUma } from "$lib/umaStore";
+  import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
 
   import RacePC from "$lib/ui/RacePC.svelte";
   import RaceMobile from "$lib/ui/RaceMobile.svelte";
 
+  // -----------------------------
+  // FIX 1 — Hydrate store BEFORE rendering (Samsung Internet fix)
+  // -----------------------------
+  selectedUma.update(v => v);
+
+  // -----------------------------
+  // TYPES
+  // -----------------------------
   type Racer = {
     id: number;
     name: string;
@@ -33,6 +22,26 @@ onMount(() => {
     isPlayer: boolean;
   };
 
+  // -----------------------------
+  // FIX 2 — Reliable mobile detection (Samsung Internet + Chrome)
+  // -----------------------------
+  let isMobile: boolean =
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 900px)").matches
+      : false;
+
+  onMount(() => {
+    const check = () => {
+      isMobile = window.matchMedia("(max-width: 900px)").matches;
+    };
+
+    check();
+    window.addEventListener("resize", check);
+  });
+
+  // -----------------------------
+  // STATE
+  // -----------------------------
   let interval: ReturnType<typeof setInterval> | null = null;
   let playerUma: string | null = null;
 
@@ -45,21 +54,9 @@ onMount(() => {
     playerUma = v;
   });
 
-onMount(() => {
-  // 1. Hydrate store FIRST
-  selectedUma.update(v => v);
-
-  // 2. Then detect device
-const check = () => {
-  isMobile = window.innerWidth < 900;
-};
-
-check(); // ← THIS MUST RUN IMMEDIATELY
-window.addEventListener("resize", check);
-
-});
-
-
+  // -----------------------------
+  // DATA
+  // -----------------------------
   const names: string[] = [
     "Special Week", "Silence Suzuka", "Tokai Teio",
     "Mejiro McQueen", "Gold Ship", "Vodka",
@@ -73,17 +70,22 @@ window.addEventListener("resize", check);
     return [...arr].sort(() => Math.random() - 0.5);
   }
 
-function makeTrack(p: number): string {
-  const total = isMobile ? 18 : 50;
-  const pos = Math.floor((p / 100) * total);
-  return `[${"-".repeat(pos)}(.)${"-".repeat(total - pos)}]`;
-}
-
+  // -----------------------------
+  // HELPERS
+  // -----------------------------
+  function makeTrack(p: number): string {
+    const total = isMobile ? 18 : 50;
+    const pos = Math.floor((p / 100) * total);
+    return `[${"-".repeat(pos)}(.)${"-".repeat(total - pos)}]`;
+  }
 
   function medal(i: number): string {
     return ["🥇", "🥈", "🥉"][i] || "";
   }
 
+  // -----------------------------
+  // RACE LOGIC
+  // -----------------------------
   function startRace(): void {
     if (!playerUma) return;
 
