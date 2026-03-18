@@ -1,7 +1,26 @@
 <script lang="ts">
-  import { selectedUma } from "$lib/umaStore";
-  import { goto } from "$app/navigation";
-  import { onMount } from "svelte";
+import { selectedUma } from "$lib/umaStore";
+import { goto } from "$app/navigation";
+import { onMount } from "svelte";
+
+// FIX 1 — hydrate store immediately
+selectedUma.update(v => v);
+
+// FIX 2 — reliable mobile detection
+let isMobile: boolean =
+  typeof window !== "undefined"
+    ? window.matchMedia("(max-width: 900px)").matches
+    : false;
+
+onMount(() => {
+  const check = () => {
+    isMobile = window.matchMedia("(max-width: 900px)").matches;
+  };
+
+  check();
+  window.addEventListener("resize", check);
+});
+
 
   import RacePC from "$lib/ui/RacePC.svelte";
   import RaceMobile from "$lib/ui/RaceMobile.svelte";
@@ -13,8 +32,6 @@
     progress: number;
     isPlayer: boolean;
   };
-
-  let isMobile: boolean = false;
 
   let interval: ReturnType<typeof setInterval> | null = null;
   let playerUma: string | null = null;
