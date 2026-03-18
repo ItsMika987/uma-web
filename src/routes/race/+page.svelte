@@ -74,7 +74,7 @@
   // HELPERS
   // -----------------------------
   function makeTrack(p: number): string {
-    const total = isMobile ? 18 : 50;
+    const total = isMobile ? 25 : 50;
     const pos = Math.floor((p / 100) * total);
     return `${".".repeat(pos)}●${".".repeat(total - pos)}`;
   }
