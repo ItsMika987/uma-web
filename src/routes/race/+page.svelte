@@ -6,7 +6,9 @@
   let interval: ReturnType<typeof setInterval> | null = null;
   let playerUma: string | null = null;
 
-  selectedUma.subscribe(v => playerUma = v);
+  selectedUma.subscribe(v => {
+    playerUma = v; // ensures store updates BEFORE navigation
+  });
 
   let showResults = false;
 
@@ -40,7 +42,7 @@
   let finishOrder: Racer[] = [];
 
   function makeTrack(p: number): string {
-    const total = 25;
+    const total = 18; // shorter track for mobile readability
     const pos = Math.floor((p / 100) * total);
     return `[${"-".repeat(pos)}(.)${"-".repeat(total - pos)}]`;
   }
@@ -131,7 +133,7 @@
     justify-content: center;
   }
 
-  /* DESKTOP — original layout */
+  /* DESKTOP — original layout but centered */
   .layout {
     display: flex;
     justify-content: flex-start;
@@ -140,7 +142,7 @@
   }
 
   .leaderboard-box {
-    width: 260px;
+    width: 300px; /* bigger PC leaderboard */
     border: 2px solid #444;
     padding: 20px;
     border-radius: 12px;
@@ -151,7 +153,7 @@
   }
 
   .race-box {
-    width: 600px;
+    width: 900px; /* bigger PC race UI */
     border: 2px solid #444;
     padding: 20px;
     border-radius: 12px;
@@ -232,7 +234,7 @@
     transform: scale(1.03);
   }
 
-  /* MOBILE — stacked layout + no zoom */
+  /* FINAL MOBILE FIXES */
   @media (max-width: 900px) {
     .layout {
       flex-direction: column;
@@ -243,13 +245,13 @@
 
     .leaderboard-box,
     .race-box {
-      width: 100%;
-      max-width: none;
+      width: 100% !important;
+      max-width: none !important;
       max-height: none;
     }
 
     .line {
-      font-size: 0.8rem; /* prevents zooming */
+      font-size: 0.75rem !important; /* prevents zoom */
     }
   }
 </style>
