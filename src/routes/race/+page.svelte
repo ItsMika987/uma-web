@@ -124,13 +124,19 @@
     overflow-y: auto;
   }
 
+  /* PC CENTER WRAPPER */
+  .center-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   /* DESKTOP — original layout */
   .layout {
     display: flex;
     justify-content: flex-start;
     gap: 30px;
     margin-top: 40px;
-    padding-left: 20px;
   }
 
   .leaderboard-box {
@@ -155,23 +161,6 @@
     overflow-y: auto;
   }
 
-  /* MOBILE — stacked layout */
-  @media (max-width: 900px) {
-    .layout {
-      flex-direction: column;
-      padding: 1rem;
-      margin-top: 0;
-      gap: 20px;
-    }
-
-    .leaderboard-box,
-    .race-box {
-      width: 100%;
-      max-width: none;
-      max-height: none;
-    }
-  }
-
   .racer-block {
     margin-bottom: 12px;
     padding: 4px;
@@ -180,7 +169,7 @@
 
   .line {
     white-space: pre;
-    font-size: clamp(0.8rem, 3vw, 1rem);
+    font-size: 1rem;
     margin: 0;
   }
 
@@ -193,7 +182,7 @@
     margin-top: 20px;
     width: 100%;
     padding: 12px 0;
-    font-size: clamp(1rem, 4vw, 1.2rem);
+    font-size: 1.1rem;
     border-radius: 10px;
     background: white;
     border: 1px solid #cfcfcf;
@@ -226,16 +215,11 @@
     width: clamp(260px, 90vw, 400px);
   }
 
-.race-box {
-  width: 600px;
-}
-
-
   .results-box button {
     width: 100%;
     margin-top: 10px;
     padding: 12px 0;
-    font-size: clamp(1rem, 4vw, 1.2rem);
+    font-size: 1.1rem;
     border-radius: 10px;
     background: white;
     border: 1px solid #cfcfcf;
@@ -248,62 +232,54 @@
     transform: scale(1.03);
   }
 
+  /* MOBILE — stacked layout + no zoom */
   @media (max-width: 900px) {
-  .race-box {
-    width: 100%;
-    max-width: none;
+    .layout {
+      flex-direction: column;
+      padding: 1rem;
+      margin-top: 0;
+      gap: 20px;
+    }
+
+    .leaderboard-box,
+    .race-box {
+      width: 100%;
+      max-width: none;
+      max-height: none;
+    }
+
+    .line {
+      font-size: 0.8rem; /* prevents zooming */
+    }
   }
-
-.center-wrap {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-
-  .leaderboard-box {
-    width: 100%;
-    max-width: none;
-  }
-
-  .line {
-    font-size: 0.8rem; /* makes the track readable */
-  }
-}
-
 </style>
 
-<div class="layout">
-  <div class="leaderboard-box">
-    <strong>Leaderboard</strong>
-    <br><br>
+<div class="center-wrap">
+  <div class="layout">
+    <div class="leaderboard-box">
+      <strong>Leaderboard</strong>
+      <br><br>
 
-    {#each leaderboard as r, i}
-      <div class="{r.isPlayer ? 'player' : ''}">
-        {medal(i)} {i + 1}. [{r.number}] {r.name}
-      </div>
-    {/each}
+      {#each leaderboard as r, i}
+        <div class="{r.isPlayer ? 'player' : ''}">
+          {medal(i)} {i + 1}. [{r.number}] {r.name}
+        </div>
+      {/each}
 
-    <button class="start-btn" on:click={startRace}>Start Race</button>
-  </div>
+      <button class="start-btn" on:click={startRace}>Start Race</button>
+    </div>
 
-  <div class="center-wrap">
-    <div class="layout">
-      <!-- leaderboard + race -->
-     </div>
-  </div>
+    <div class="race-box">
+      <strong>Race</strong>
+      <br><br>
 
-
-  <div class="race-box">
-    <strong>Race</strong>
-    <br><br>
-
-    {#each racers as r}
-      <div class="racer-block {r.isPlayer ? 'player' : ''}">
-        <div class="line">[{r.number}] {r.name}</div>
-        <div class="line">{makeTrack(r.progress)}</div>
-      </div>
-    {/each}
+      {#each racers as r}
+        <div class="racer-block {r.isPlayer ? 'player' : ''}">
+          <div class="line">[{r.number}] {r.name}</div>
+          <div class="line">{makeTrack(r.progress)}</div>
+        </div>
+      {/each}
+    </div>
   </div>
 </div>
 
