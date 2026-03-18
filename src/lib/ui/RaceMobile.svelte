@@ -74,7 +74,7 @@
 
 .leaderboard-box,
 .race-box {
-  max-width: 50%;
+  max-width: 75%;
   overflow: hidden;
 }
 
