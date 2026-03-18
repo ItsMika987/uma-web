@@ -1,4 +1,5 @@
 <script lang="ts">
+  export const prerender = false;
   import { selectedUma } from "$lib/umaStore";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
