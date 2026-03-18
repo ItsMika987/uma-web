@@ -201,19 +201,26 @@
 }
 
 .results-box button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  border: 2px solid #444;
+  padding: 14px 40px;
+  font-size: 20px;
   background: white;
-  border-radius: 8px;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
   cursor: pointer;
-  transition: 0.15s;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
 }
 
 .results-box button:hover {
-  background: #f0f0f0;
-  transform: scale(1.05);
+  background: #f5f5f5;
+  border-color: #b5b5b5;
+  transform: scale(1.03);
 }
+
+/* ⭐ spacing between the two buttons */
+.results-box button + button {
+  margin-top: 10px;
+}
+
 </style>
 
 <div class="layout">
