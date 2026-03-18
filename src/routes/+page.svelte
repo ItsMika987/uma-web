@@ -79,7 +79,7 @@
   <button class="start-btn" on:click={start}>Start</button>
 
   <div class="footer">
-    v0.0.1<br>npm
+    v0.0.2<br>npm
     made by @ItsMika987 on X
   </div>
 </div>
