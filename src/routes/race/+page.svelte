@@ -226,6 +226,11 @@
     width: clamp(260px, 90vw, 400px);
   }
 
+.race-box {
+  width: 600px;
+}
+
+
   .results-box button {
     width: 100%;
     margin-top: 10px;
@@ -242,6 +247,30 @@
     background: #f5f5f5;
     transform: scale(1.03);
   }
+
+  @media (max-width: 900px) {
+  .race-box {
+    width: 100%;
+    max-width: none;
+  }
+
+.center-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+  .leaderboard-box {
+    width: 100%;
+    max-width: none;
+  }
+
+  .line {
+    font-size: 0.8rem; /* makes the track readable */
+  }
+}
+
 </style>
 
 <div class="layout">
@@ -257,6 +286,13 @@
 
     <button class="start-btn" on:click={startRace}>Start Race</button>
   </div>
+
+  <div class="center-wrap">
+    <div class="layout">
+      <!-- leaderboard + race -->
+     </div>
+  </div>
+
 
   <div class="race-box">
     <strong>Race</strong>
