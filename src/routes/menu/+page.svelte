@@ -8,6 +8,11 @@
   function goBack() {
     goto("/");
   }
+
+  function settings() {
+    goto("/settings");
+  }
+
 </script>
 
 <style>
@@ -105,5 +110,7 @@
 
   <div class="bottom-row">
     <button class="menu-btn" on:click={goBack}>Title Screen</button>
+    <button class="menu-btn" on:click={settings}>Settings</button>
+
   </div>
 </div>
