@@ -12,23 +12,22 @@
 <slot />
 
 <style>
+  :global(body) {
+    --bg: #ffffff;
+    --text: #000000;
+    --box-bg: #f5f5f5;
+    --box-border: #cccccc;
+    --button-bg: #eaeaea;
+    --button-text: #000000;
+  }
+
   :global(body.dark) {
-    background: #121212;
-    color: #e5e5e5;
-  }
-
-  :global(body.dark .leaderboard-box),
-  :global(body.dark .race-box),
-  :global(body.dark .results-box),
-  :global(body.dark .settings-box) {
-    background: #1e1e1e !important;
-    border-color: #333 !important;
-    color: #e5e5e5 !important;
-  }
-
-  :global(body.dark button) {
-    background: #2a2a2a !important;
-    color: #fff !important;
-    border-color: #444 !important;
+    --bg: #121212;
+    --text: #e5e5e5;
+    --box-bg: #1e1e1e;
+    --box-border: #333333;
+    --button-bg: #2a2a2a;
+    --button-text: #ffffff;
   }
 </style>
+

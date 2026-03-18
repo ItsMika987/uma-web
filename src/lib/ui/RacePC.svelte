@@ -65,10 +65,11 @@
 
 .leaderboard-box,
 .race-box {
-  border: 2px solid #444;
   padding: 20px;
   border-radius: 12px;
-  background: #f8f8f8;
+  background: var(--box-bg);
+  color: var(--text);
+  border-color: var(--box-border);
   text-align: center;
 }
 
@@ -110,8 +111,9 @@
   width: 100%;
   padding: 10px 0;
   font-size: 16px;
-  background: white;
-  border: 1px solid #cfcfcf;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--box-border);
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
@@ -127,17 +129,18 @@
 .results-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.55);
+  background: var(--bg);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .results-box {
-  background: white;
   padding: 30px 40px;
   border-radius: 12px;
-  border: 2px solid #444;
+  background: var(--box-bg);
+  color: var(--text);
+  border-color: var(--box-border);
   text-align: center;
   width: 450px;
 }
@@ -145,8 +148,9 @@
 .results-box button {
   padding: 14px 40px;
   font-size: 20px;
-  background: white;
-  border: 1px solid #cfcfcf;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--box-border);
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s, transform 0.1s;

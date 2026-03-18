@@ -22,7 +22,7 @@
   margin: 0;
   padding: 0;
   font-family: monospace;
-  background: #fafafa;
+  background: var(--bg);
   overflow-x: hidden; 
 }
 
@@ -63,8 +63,10 @@
   }
 
   .menu-btn {
-    background: white;
-    border: 1px solid #cfcfcf;
+background: var(--button-bg);
+color: var(--button-text);
+border-color: var(--box-border);
+
   }
 
   .menu-btn:hover {
@@ -78,8 +80,10 @@
   }
 
   .soon-btn {
-    background: rgb(16, 8, 8);
-    border: 2px solid rgb(16, 8, 8);
+background: var(--button-bg);
+color: var(--button-text);
+border-color: var(--box-border);
+
   }
 
   .soon-btn:hover {

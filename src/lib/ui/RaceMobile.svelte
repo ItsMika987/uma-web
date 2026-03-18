@@ -65,10 +65,12 @@
   .leaderboard-box,
   .race-box {
     width: 100%;
-    border: 2px solid #444;
     padding: 12px;
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--box-bg);
+    color: var(--text);
+    border-color: var(--box-border);
+
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   }
 
@@ -111,15 +113,17 @@ strong {
     padding: 10px;
     font-size: 15px;
     border-radius: 10px;
-    border: 1px solid #ccc;
-    background: #f5f5f5;
+    background: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--box-border);
+
   }
 
   /* Results overlay */
   .results-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.45);
+    background: var(--bg);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,7 +132,9 @@ strong {
   .results-box {
     width: 80%;
     max-width: 360px;
-    background: white;
+    background: var(--box-bg);
+    color: var(--text);
+    border-color: var(--box-border);
     padding: 18px;
     border-radius: 14px;
     text-align: center;
@@ -144,8 +150,10 @@ strong {
     padding: 10px;
     margin-top: 10px;
     border-radius: 10px;
-    border: 1px solid #ccc;
-    background: #f5f5f5;
+    background: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--box-border);
+
   }
 </style>
 

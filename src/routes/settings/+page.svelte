@@ -21,9 +21,11 @@
     max-width: 420px;
     margin: 40px auto;
     padding: 20px;
-    border: 2px solid #444;
     border-radius: 12px;
-    background: #fff;
+    background: var(--box-bg);
+    color: var(--text);
+    border-color: var(--box-border);
+
   }
 
   h2 {
@@ -48,8 +50,9 @@
     margin-top: 20px;
     padding: 12px;
     border-radius: 10px;
-    border: 1px solid #ccc;
-    background: #f5f5f5;
+    background: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--box-border);
     font-size: 16px;
   }
 </style>

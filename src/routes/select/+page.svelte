@@ -32,7 +32,7 @@
     margin: 0;
     padding: 0;
     font-family: monospace;
-    background: #fafafa;
+    background: var(--bg);
     overflow-x: hidden;
     overflow-y: auto;
   }
@@ -81,8 +81,9 @@ html, body {
     border-radius: 12px;
     cursor: pointer;
     width: 260px;
-    background: white;
-    border: 1px solid #cfcfcf;
+    background: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--box-border);
     transition: 0.15s;
   }
 
@@ -115,8 +116,9 @@ html, body {
     padding: 0.9rem 2rem;
     font-size: clamp(1rem, 4vw, 1.2rem);
     border-radius: 12px;
-    background: white;
-    border: 1px solid #cfcfcf;
+    background: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--box-border);
     cursor: pointer;
     transition: 0.15s;
   }
