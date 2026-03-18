@@ -1,20 +1,11 @@
 <script lang="ts">
   import { selectedUma } from "$lib/umaStore";
   import { goto } from "$app/navigation";
-  import { onMount } from "svelte";
 
   let interval: ReturnType<typeof setInterval> | null = null;
   let playerUma: string | null = null;
 
-  selectedUma.subscribe(v => {
-    playerUma = v;
-  });
-
-  let showResults = false;
-
-  onMount(() => {
-    showResults = false;
-  });
+  selectedUma.subscribe(v => playerUma = v);
 
   type Racer = {
     id: number;
@@ -41,8 +32,10 @@
   let leaderboard: Racer[] = [];
   let finishOrder: Racer[] = [];
 
+  let showResults = false;
+
   function makeTrack(p: number): string {
-    const total = 18; // shorter track for mobile
+    const total = 50;
     const pos = Math.floor((p / 100) * total);
     return `[${"-".repeat(pos)}(.)${"-".repeat(total - pos)}]`;
   }
@@ -55,7 +48,10 @@
   }
 
   function startRace() {
-    if (!playerUma) return;
+    if (!playerUma) {
+      alert("Please select an Uma first!");
+      return;
+    }
 
     if (interval) stopRace();
 
@@ -105,6 +101,7 @@
   function stopRace() {
     clearInterval(interval!);
     interval = null;
+
     leaderboard = [...finishOrder];
     showResults = true;
   }
@@ -116,139 +113,107 @@
 </script>
 
 <style>
-  :global(html),
-  :global(body) {
-    margin: 0;
-    padding: 0;
-    font-family: monospace;
-    background: #fafafa;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
+.layout {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+  font-family: monospace;
+}
 
-  /* ORIGINAL PC LAYOUT RESTORED */
-  .layout {
-    display: flex;
-    justify-content: flex-start;
-    gap: 30px;
-    margin-top: 40px;
-    padding-left: 20px;
-  }
+.leaderboard-box,
+.race-box {
+  border: 2px solid #444;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f8f8f8;
+  text-align: center;
+}
 
-  .leaderboard-box {
-    width: 260px; /* original */
-    border: 2px solid #444;
-    padding: 20px;
-    border-radius: 12px;
-    background: #f8f8f8;
-    text-align: center;
-    max-height: 600px;
-    overflow-y: auto;
-  }
+.leaderboard-box {
+  width: 260px;
+  max-height: 600px;
+  overflow-y: auto;
+}
 
-  .race-box {
-    width: 600px; /* original */
-    border: 2px solid #444;
-    padding: 20px;
-    border-radius: 12px;
-    background: #f8f8f8;
-    text-align: center;
-    max-height: 600px;
-    overflow-y: auto;
-  }
+.race-box {
+  width: 600px;
+  max-height: 600px;
+  overflow-y: auto;
+}
 
-  .racer-block {
-    margin-bottom: 12px;
-    padding: 4px;
-    border-radius: 6px;
-  }
+.racer-block {
+  margin-bottom: 12px;
+  padding: 4px;
+  border-radius: 6px;
+  text-align: center;
+}
 
-  .line {
-    white-space: pre;
-    font-size: 1rem;
-    margin: 0;
-  }
+.line {
+  white-space: pre;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  line-height: 1.3;
+  text-align: center;
+}
 
-  .player {
-    background: #ECFFDC;
-    border: 2px solid #90EE90;
-  }
+.player {
+  background: #ECFFDC;
+  border: 2px solid #90EE90;
+}
 
-  .start-btn {
-    margin-top: 20px;
-    width: 100%;
-    padding: 12px 0;
-    font-size: 1.1rem;
-    border-radius: 10px;
-    background: white;
-    border: 1px solid #cfcfcf;
-    cursor: pointer;
-    transition: 0.15s;
-  }
+.start-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  background: white;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
 
-  .start-btn:hover {
-    background: #f5f5f5;
-    transform: scale(1.03);
-  }
+.start-btn:hover {
+  background: #f5f5f5;
+  border-color: #b5b5b5;
+  transform: scale(1.03);
+}
 
-  .results-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    z-index: 9999;
-  }
+/* ⭐ RESULTS POPUP */
+.results-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .results-box {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    border: 2px solid #444;
-    text-align: center;
-    width: clamp(260px, 90vw, 400px);
-  }
+.results-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  border: 2px solid #444;
+  text-align: center;
+  width: 300px;
+}
 
-  .results-box button {
-    width: 100%;
-    margin-top: 10px;
-    padding: 12px 0;
-    font-size: 1.1rem;
-    border-radius: 10px;
-    background: white;
-    border: 1px solid #cfcfcf;
-    cursor: pointer;
-    transition: 0.15s;
-  }
+.results-box button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: 2px solid #444;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.15s;
+}
 
-  .results-box button:hover {
-    background: #f5f5f5;
-    transform: scale(1.03);
-  }
-
-  /* MOBILE FIXES (KEEP THESE) */
-  @media (max-width: 900px) {
-    .layout {
-      flex-direction: column;
-      padding: 1rem;
-      margin-top: 0;
-      gap: 20px;
-      padding-left: 0;
-    }
-
-    .leaderboard-box,
-    .race-box {
-      width: 100% !important;
-      max-width: none !important;
-      max-height: none;
-    }
-
-    .line {
-      font-size: 0.75rem !important;
-    }
-  }
+.results-box button:hover {
+  background: #f0f0f0;
+  transform: scale(1.05);
+}
 </style>
 
 <div class="layout">
@@ -284,9 +249,7 @@
       <h2>Results</h2>
 
       {#each finishOrder as r, i}
-        <p class="{r.isPlayer ? 'player' : ''}">
-          {medal(i)} {i + 1}. [{r.number}] {r.name}
-        </p>
+        <p>{medal(i)} {i + 1}. [{r.number}] {r.name}</p>
       {/each}
 
       <button on:click={restartRace}>Race Again</button>
