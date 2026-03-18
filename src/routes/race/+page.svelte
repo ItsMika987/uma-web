@@ -56,7 +56,7 @@
   }
 
   function makeTrack(p: number): string {
-    const total = isMobile ? 50 : 50;
+    const total = isMobile ? 40 : 50;
     const pos = Math.floor((p / 100) * total);
     return `${".".repeat(pos)}●${".".repeat(total - pos)}`;
   }
