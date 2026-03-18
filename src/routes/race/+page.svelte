@@ -197,7 +197,7 @@
   border-radius: 12px;
   border: 2px solid #444;
   text-align: center;
-  width: 300px;
+  width: 450px;
 }
 
 .results-box button {
@@ -215,6 +215,12 @@
   border-color: #b5b5b5;
   transform: scale(1.03);
 }
+
+.results-box p.player {
+  padding: 6px;
+  border-radius: 6px;
+}
+
 
 /* ⭐ spacing between the two buttons */
 .results-box button + button {
@@ -255,9 +261,12 @@
     <div class="results-box">
       <h2>Results</h2>
 
-      {#each finishOrder as r, i}
-        <p>{medal(i)} {i + 1}. [{r.number}] {r.name}</p>
-      {/each}
+{#each finishOrder as r, i}
+  <p class="{r.isPlayer ? 'player' : ''}">
+    {medal(i)} {i + 1}. [{r.number}] {r.name}
+  </p>
+{/each}
+
 
       <button on:click={restartRace}>Race Again</button>
       <button on:click={() => goto("/menu")}>Return to Menu</button>
