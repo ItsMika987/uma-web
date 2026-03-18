@@ -35,7 +35,7 @@
   let showResults = false;
 
   function makeTrack(p: number): string {
-    const total = 25; // mobile-friendly
+    const total = 25;
     const pos = Math.floor((p / 100) * total);
     return `[${"-".repeat(pos)}(.)${"-".repeat(total - pos)}]`;
   }
@@ -116,26 +116,55 @@
     font-family: monospace;
     background: #fafafa;
     overflow-x: hidden;
+    overflow-y: auto;
   }
 
+  /* DESKTOP — original layout */
   .layout {
-    padding: 1rem;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 900px;
-    margin: auto;
+    justify-content: flex-start;
+    gap: 30px;
+    margin-top: 40px;
+    padding-left: 20px;
   }
 
-  .box {
+  .leaderboard-box {
+    width: 260px;
     border: 2px solid #444;
     padding: 20px;
     border-radius: 12px;
     background: #f8f8f8;
     text-align: center;
-    width: 100%;
-    max-height: 60vh;
+    max-height: 600px;
     overflow-y: auto;
+  }
+
+  .race-box {
+    width: 600px;
+    border: 2px solid #444;
+    padding: 20px;
+    border-radius: 12px;
+    background: #f8f8f8;
+    text-align: center;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+
+  /* MOBILE — stacked layout */
+  @media (max-width: 900px) {
+    .layout {
+      flex-direction: column;
+      padding: 1rem;
+      margin-top: 0;
+      gap: 20px;
+    }
+
+    .leaderboard-box,
+    .race-box {
+      width: 100%;
+      max-width: none;
+      max-height: none;
+    }
   }
 
   .racer-block {
@@ -210,7 +239,7 @@
 </style>
 
 <div class="layout">
-  <div class="box">
+  <div class="leaderboard-box">
     <strong>Leaderboard</strong>
     <br><br>
 
@@ -223,7 +252,7 @@
     <button class="start-btn" on:click={startRace}>Start Race</button>
   </div>
 
-  <div class="box">
+  <div class="race-box">
     <strong>Race</strong>
     <br><br>
 

@@ -26,6 +26,7 @@
     font-family: monospace;
     background: #fafafa;
     overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .wrapper {
@@ -36,11 +37,11 @@
   }
 
   h1 {
-    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-size: clamp(2rem, 5vw, 3rem);
     margin-bottom: 1.5rem;
   }
 
-  /* Desktop: 3 columns */
+  /* DESKTOP — original layout */
   .columns {
     display: flex;
     justify-content: center;
@@ -48,12 +49,12 @@
     margin-bottom: 2rem;
   }
 
-  /* Mobile: stack into 1 column */
+  /* MOBILE — stack columns */
   @media (max-width: 900px) {
     .columns {
       flex-direction: column;
-      gap: 20px;
       align-items: center;
+      gap: 20px;
     }
   }
 
@@ -68,10 +69,17 @@
     font-size: clamp(1rem, 4vw, 1.2rem);
     border-radius: 12px;
     cursor: pointer;
-    width: clamp(220px, 70vw, 260px);
+    width: 260px;
     background: white;
     border: 1px solid #cfcfcf;
     transition: 0.15s;
+  }
+
+  @media (max-width: 900px) {
+    .uma-btn {
+      width: 90vw;
+      max-width: 260px;
+    }
   }
 
   .uma-btn:hover {
@@ -150,5 +158,3 @@
     <button class="action-btn {currentSelection ? '' : 'disabled'}" on:click={startRace}>Race</button>
   </div>
 </div>
-
-c
