@@ -147,4 +147,20 @@
     border-radius: 14px;
     text-align: center;
   }
+
+  .results-box button {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 18px;
+  border-radius: 10px;
+  margin-top: 12px;
+}
+
+.start-btn {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
 </style>
