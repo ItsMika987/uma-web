@@ -74,7 +74,7 @@
 
 .leaderboard-box,
 .race-box {
-  max-width: 75%;
+  max-width: 90%;
   overflow: hidden;
 }
 
@@ -126,7 +126,7 @@ strong {
   }
 
   .results-box {
-    width: 90%;
+    width: 80%;
     max-width: 360px;
     background: white;
     padding: 18px;
