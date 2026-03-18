@@ -221,8 +221,6 @@
   border-radius: 6px;
 }
 
-
-/* ⭐ spacing between the two buttons */
 .results-box button + button {
   margin-top: 10px;
 }

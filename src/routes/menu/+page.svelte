@@ -107,5 +107,3 @@
     <button class="menu-btn" on:click={goBack}>Title Screen</button>
   </div>
 </div>
-
-c
