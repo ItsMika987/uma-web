@@ -72,15 +72,22 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   }
 
-  strong {
-    font-size: 16px;
-  }
+.leaderboard-box,
+.race-box {
+  max-width: 100%;
+  overflow: hidden;
+}
 
-  .leaderboard-box div,
-  .race-box .line {
-    font-size: 13px;
-    line-height: 1.3;
-  }
+
+strong {
+  font-size: 14px;
+}
+
+.leaderboard-box div,
+.race-box .line {
+  font-size: 11px;
+}
+
 
   .racer-block {
     margin-bottom: 6px;
