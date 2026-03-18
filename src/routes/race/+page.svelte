@@ -1,11 +1,18 @@
 <script lang="ts">
   import { selectedUma } from "$lib/umaStore";
   import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
 
   let interval: ReturnType<typeof setInterval> | null = null;
   let playerUma: string | null = null;
 
   selectedUma.subscribe(v => playerUma = v);
+
+  let showResults = false;
+
+  onMount(() => {
+    showResults = false; // prevents invisible overlay blocking mobile taps
+  });
 
   type Racer = {
     id: number;
@@ -31,8 +38,6 @@
   let racers: Racer[] = [];
   let leaderboard: Racer[] = [];
   let finishOrder: Racer[] = [];
-
-  let showResults = false;
 
   function makeTrack(p: number): string {
     const total = 25;
@@ -209,6 +214,7 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
+    z-index: 9999;
   }
 
   .results-box {

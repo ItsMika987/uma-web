@@ -158,3 +158,5 @@
     <button class="action-btn {currentSelection ? '' : 'disabled'}" on:click={startRace}>Race</button>
   </div>
 </div>
+
+c
