@@ -12,3 +12,5 @@ export function startRace(uma: string) {
   raceWinner.set(null);
   raceRunning.set(true);
 }
+
+// c
