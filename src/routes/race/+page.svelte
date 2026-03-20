@@ -1,0 +1,137 @@
+<script lang="ts">
+  import { selectedUma } from "$lib/umaStore";
+  import { buildRaceRoster } from "$lib/stores/game";
+  import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
+
+  import RacePC from "$lib/ui/RacePC.svelte";
+  import RaceMobile from "$lib/ui/RaceMobile.svelte";
+
+  selectedUma.update(v => v);
+
+  type Racer = {
+    id: number;
+    name: string;
+    number: number;
+    progress: number;
+    isPlayer: boolean;
+  };
+
+  let isMobile: boolean =
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 900px)").matches
+      : false;
+
+  onMount(() => {
+    const check = () => {
+      isMobile = window.matchMedia("(max-width: 900px)").matches;
+    };
+
+    check();
+    window.addEventListener("resize", check);
+  });
+
+  let interval: ReturnType<typeof setInterval> | null = null;
+  let playerUma: string | null = null;
+
+  let racers: Racer[] = [];
+  let leaderboard: Racer[] = [];
+  let finishOrder: Racer[] = [];
+  let showResults: boolean = false;
+
+  selectedUma.subscribe((v: string | null) => {
+    playerUma = v;
+  });
+
+  // names are built dynamically from roster when race starts
+
+  function shuffle<T>(arr: T[]): T[] {
+    return [...arr].sort(() => Math.random() - 0.5);
+  }
+
+  function makeTrack(p: number): string {
+    const total = isMobile ? 40 : 50;
+    const pos = Math.floor((p / 100) * total);
+    return `${".".repeat(pos)}●${".".repeat(total - pos)}`;
+  }
+
+  function medal(i: number): string {
+    return ["🥇", "🥈", "🥉"][i] || "";
+  }
+
+  function startRace(): void {
+    if (!playerUma) return;
+
+    if (interval) clearInterval(interval);
+
+    leaderboard = [];
+    finishOrder = [];
+    showResults = false;
+
+    const names = buildRaceRoster(playerUma);
+    const uniqueNumbers = shuffle([...Array(names.length)].map((_, i) => i + 1));
+
+    racers = shuffle(
+      names.map((name, i) => ({
+        id: i + 1,
+        name,
+        number: uniqueNumbers[i],
+        progress: 0,
+        isPlayer: name === playerUma
+      }))
+    );
+
+    interval = setInterval(() => {
+      let allDone = true;
+
+      racers.forEach((r: Racer) => {
+        if (r.progress < 100) {
+          r.progress = Math.min(r.progress + (Math.random() * 2 + 1), 100);
+          if (r.progress < 100) allDone = false;
+        }
+
+        if (r.progress >= 100 && !finishOrder.includes(r)) {
+          finishOrder.push(r);
+        }
+      });
+
+      racers = [...racers];
+
+      leaderboard = [
+        ...finishOrder,
+        ...racers
+          .filter(r => !finishOrder.includes(r))
+          .sort((a, b) => b.progress - a.progress)
+      ];
+
+      if (allDone) {
+        clearInterval(interval!);
+        interval = null;
+        showResults = true;
+      }
+    }, 80);
+  }
+
+  function restartRace(): void {
+    showResults = false;
+    startRace();
+  }
+
+  function gotoMenu(): void {
+    goto("/home");
+  }
+</script>
+
+{#if isMobile}
+  <RaceMobile
+    {racers} {leaderboard} {finishOrder} {showResults}
+    {startRace} {restartRace} {gotoMenu}
+    {medal} {makeTrack}
+  />
+{:else}
+  <RacePC
+    {racers} {leaderboard} {finishOrder} {showResults}
+    {startRace} {restartRace} {gotoMenu}
+    {medal} {makeTrack}
+  />
+{/if}
