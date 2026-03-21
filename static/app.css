@@ -1,0 +1,20 @@
+/* GLOBAL RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal overflow (the #1 cause of zoom on PC) */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  font-family: monospace;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Prevent auto-zoom on interactive elements */
+button, input, select, textarea {
+  font-size: 16px;
+}
