@@ -7,11 +7,11 @@
 <div class="settings-wrapper">
   <div class="settings-container">
     <h1>Secrets</h1>
-    <p class="hint">Progress auto-saves to your browser. Use export/import to back up or transfer saves.</p>
+    <p class="hint">All the uma funnies that are randomly made OwO.</p>
     
     <div class="divider"></div>
 
-    <button class="action-btn danger">Reset Save</button>
+    <button class="action-btn" on:click={() => goto('/secrets/free-money')}>Free Money</button>
 
     <div class="divider"></div>
 
