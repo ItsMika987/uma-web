@@ -8,7 +8,7 @@ via the chosen file sharing service of the sender
 
 All assets/characters are of CyGames's ownership, as i (ItsMika) do not take any
 ownership attributre except for the code that i upload to said repository and 
-the repository
+the repository itself
 
 the use of said code and/or entire project in a maner where payment of any form is 
 needed to acces is not permitted
